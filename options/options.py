@@ -1,9 +1,8 @@
 __author__ = 'thibautxiong'
 
-import numpy as np
 import pandas as pd
-import mibian as mb
-
+import numpy as np
+import BaseBot
 
 def get_data():
     df = pd.DataFrame()
@@ -49,42 +48,19 @@ def get_data():
     df['ix'] = df.index
     return df
 
-
-def connect_web_socket(local=False):
-    import json
-    from websocket import create_connection
-    if local is False:
-        ws = create_connection("ws://big.m.angocore.com/(actual username)/(actual password)")
-    else:
-        ws = create_connection("ws://localhost:10914/trader0/trader0")
-    auth_msg = json.dumps({"message_type": "REGISTER", "token": "uiuc123"},
-                          sort_keys=True, indent=4, separators=(',', ':'))
-
-    print auth_msg
-    ws.send(auth_msg)
-    result = ws.recv()
-    print result
+class OptionsBot(BaseBot)
 
 
-def black_scholes(data, strike, type):
-    call_price = data[str(strike)+type]
-    underlying_price = data['underlying']
-    strike_price = strike
-    interest_rate = 0
-    days_to_expiration = 120 - 120*(data['ix']/1800)
-    c = mb.BS([underlying_price, strike_price, interest_rate, days_to_expiration],
-              callPrice=call_price)
-    return c.impliedVolatility*.001
-
-if __name__ == "__main__":
-    # df = get_data()
-
-    connect_web_socket(local=True)
-
-    # call_strikes = [90, 95, 100, 105, 100]
-    # # put_strikes = ['90', '95', '100', '105']
-    # for call_strike in call_strikes:
-    #     vol = df.apply(lambda x: black_scholes(x, call_strike, 'C'), axis=1)
-    #     df[str(call_strike)+'_vol'] = vol
-    #
-    # print df.head(5)
+# if __name__ == "__main__":
+#     # pass
+#     # df = get_data()
+#
+#     connect_web_socket(local=True)
+#
+#     # call_strikes = [90, 95, 100, 105, 100]
+#     # # put_strikes = ['90', '95', '100', '105']
+#     # for call_strike in call_strikes:
+#     #     vol = df.apply(lambda x: black_scholes(x, call_strike, 'C'), axis=1)
+#     #     df[str(call_strike)+'_vol'] = vol
+#     #
+#     # print df.head(5)

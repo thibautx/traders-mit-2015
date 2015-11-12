@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab281e67-f0ac-4164-9b4f-83fe1d60e049" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BaseBot.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/options/options.py" afterPath="$PROJECT_DIR$/options/options.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -21,6 +22,29 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="BaseBot.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/BaseBot.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.9721707" vertical-offset="1517" max-vertical-offset="2655">
+                    <caret line="184" column="19" selection-start-line="184" selection-start-column="19" selection-end-line="184" selection-end-column="19" />
+                    <folding>
+                      <element signature="e#28#51#0" expanded="true" />
+                      <element signature="e#612#964#0" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="traders-mit-competition" />
@@ -30,11 +54,11 @@
       <file leaf-file-name="options.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/options/options.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16605166" vertical-offset="0" max-vertical-offset="813">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.18450184" vertical-offset="0" max-vertical-offset="813">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
-                <element signature="e#29#47#0" expanded="true" />
-                <element signature="e#110#1356#0" expanded="false" />
+                <element signature="e#29#48#0" expanded="true" />
+                <element signature="e#104#1350#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,6 +73,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/options/options.py" />
+        <option value="$PROJECT_DIR$/BaseBot.py" />
       </list>
     </option>
   </component>
@@ -80,7 +105,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -115,6 +139,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,20 +348,23 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="start options" />
-    <option name="LAST_COMMIT_MESSAGE" value="start options" />
+    <MESSAGE value="push" />
+    <option name="LAST_COMMIT_MESSAGE" value="push" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/options/options.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3150">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#29#47#0" expanded="true" />
-            <element signature="e#110#1356#0" expanded="false" />
+            <element signature="e#29#48#0" expanded="true" />
+            <element signature="e#104#1350#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -346,8 +374,19 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#29#47#0" expanded="true" />
-            <element signature="e#110#1356#0" expanded="false" />
+            <element signature="e#29#48#0" expanded="true" />
+            <element signature="e#104#1350#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/options/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#29#48#0" expanded="true" />
+            <element signature="e#104#1350#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -356,17 +395,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3323077" vertical-offset="32004" max-vertical-offset="43155">
           <caret line="2148" column="0" selection-start-line="2148" selection-start-column="0" selection-end-line="2148" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/options/options.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16605166" vertical-offset="0" max-vertical-offset="813">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.18450184" vertical-offset="0" max-vertical-offset="813">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
-            <element signature="e#29#47#0" expanded="true" />
-            <element signature="e#110#1356#0" expanded="false" />
+            <element signature="e#29#48#0" expanded="true" />
+            <element signature="e#104#1350#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BaseBot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9721707" vertical-offset="1517" max-vertical-offset="2655">
+          <caret line="184" column="19" selection-start-line="184" selection-start-column="19" selection-end-line="184" selection-end-column="19" />
+          <folding>
+            <element signature="e#28#51#0" expanded="true" />
+            <element signature="e#612#964#0" expanded="false" />
           </folding>
         </state>
       </provider>
