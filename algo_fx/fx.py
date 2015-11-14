@@ -4,7 +4,7 @@ from collections import deque
 
 
 FX = ['USD', 'CAD', 'EUR', 'CHF', 'JPY']
-PAIRS = ['USDCAD', 'EURUSD', 'USDCHF', 'USDJPY', 'EURCAD', 'EURJPY', 'EURCHF', 'CHFJPY']
+PAIRS = set(['USDCAD', 'EURUSD', 'USDCHF', 'USDJPY', 'EURCAD', 'EURJPY', 'EURCHF', 'CHFJPY'])
 
 INDEX = {'USD': 0,
          'CAD': 1,
@@ -251,28 +251,48 @@ class FXBot(BaseBot):
     def arbitrage(self):
         orders = []
         graph_data = {}
-        for pair, value in self.topBid.iteritems():
+        for pair, top in zip(self.topBid.keys(), zip(self.topBid.values(), self.topAsk.values())):
+            top_bid, top_ask = top
             pair_1 = pair[:3]  # currency 1
             pair_2 = pair[3:]  # currency 2
             if pair_1 not in graph_data.keys():
                 graph_data[pair_1] = {}
             if pair_2 not in graph_data.keys():
                 graph_data[pair_2] = {}
-            graph_data[pair_1+'_'+pair_2] = float(value)
-            graph_data[pair_2+'_'+pair_1] = 1/float(value)
+            graph_data[pair_1+'_'+pair_2] = float(top_bid)
+            graph_data[pair_2+'_'+pair_1] = 1/float(top_ask)
 
         G = make_graph(graph_data)
         bf = BellmanFord(G, G.vertices()[0])
         if bf.has_negative_cycle():
             result = bf.get_cycle()
-            print "Start with 100 units {0}".format(result[-1].fromVertex())
+#            print("Start with 100 units {0}".format(result[-1].fromVertex()))
             balance = 100
+            quantity = float('inf')
+
             while result:
 
                 edge = result.pop()
-                key = edge.fromVertex() + "_" + edge.toVertex()
-                balance = balance * graph_data[key]
-                print "{0} to {1} @ {2} = {3:.2f} {4}".format(edge.fromVertex(), edge.toVertex(), graph_data[key], balance, edge.toVertex())
+                print("{0} to {1}".format(edge.fromVertex(), edge.toVertex()))
+                ticker = edge.fromVertex() + edge.toVertex()
+                buy    = True
+                if ticker not in PAIRS:
+                    ticker = edge.toVertex() + edge.fromVertex()
+                    buy    = False
+
+                quantity = min(
+                    quantity,
+                    self.topAskQty[ticker] if buy else self.topBidQty[ticker]
+                )
+                orders.append({
+                    'ticker'  : ticker,
+                    'buy'     : buy,
+                    'quantity': 0,
+                    'price'   : self.topAsk[ticker] if buy else self.topBid[ticker]
+                })
+
+        for i in xrange(len(orders)):
+            orders[i]['quantity'] = quantity
 
         return orders
 
@@ -304,7 +324,7 @@ class FXBot(BaseBot):
 
 if __name__ == '__main__':
     bot = FXBot()
-    print "options are", bot.options.data
+    print("options are", bot.options.data)
 
     for t in bot.makeThreads():
         t.daemon = True

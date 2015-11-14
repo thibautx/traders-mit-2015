@@ -30,16 +30,20 @@ class Options():
 
     def set(self, key, val):
         if key not in self.data:
-            print "Invalid option: %s" % key
+            print("Invalid option: %s" % key)
         else:
-            print "Set %s to %s" % (key, val)
+            print("Set %s to %s" % (key, val))
             self.data[key] = val
 
 
 class BaseBot(object):
     # XXX change me for actual running
-    trader_id = 'trader0'
-    password = ''
+    trader_id = 'cshao4@illinois.edu'
+    password = 'earnestly-personal-networks'
+
+#    trader_id = 'trader0'
+#    password = 'trader0'
+
 
     # Sets up the connection to the server.
     # Please do not change anything here unless
@@ -54,8 +58,9 @@ class BaseBot(object):
         })
 
         self.ws = create_connection(
-            'ws://localhost:10914/%s/%s' % (self.trader_id, self.password),
-            timeout=0.5,
+            'ws://big.m.angocore.com/%s/%s' % (self.trader_id, self.password),
+#            'ws://localhost:10914/%s/%s' % (self.trader_id, self.password),
+            timeout=5,
         )
         self.outbox = Queue()
 
@@ -64,7 +69,9 @@ class BaseBot(object):
         self.lastActionTime = time()
 
         self.topBid = {}
+        self.topBidQty = {}
         self.topAsk = {}
+        self.topAskQty = {}
         self.lastPrices = {}
         self.positions = {}
         self.priceChange = {}
@@ -77,7 +84,7 @@ class BaseBot(object):
 
     # You should not have to modify the following three
     # methods.
-    
+
     # Starts and returns the two processes of the bot.
     def makeThreads(self):
         reader_t = Thread(target=self.ws_reader, args=())
@@ -127,9 +134,13 @@ class BaseBot(object):
         if msg.get('market_states'):
             for ticker, state in msg['market_states'].iteritems():
                 if len(state['bids']):
-                    self.topBid[ticker] = max(map(float, state['bids'].keys()))
+                    self.topBid[ticker]    = max(state['bids'].keys(), key=float)
+                    self.topBidQty[ticker] = state['bids'][self.topBid[ticker]]
+                    self.topBid[ticker] = float(self.topBid[ticker])
                 if len(state['asks']):
-                    self.topAsk[ticker] = min(map(float, state['asks'].keys()))
+                    self.topAsk[ticker]    = min(state['asks'].keys(), key=float)
+                    self.topAskQty[ticker] = state['asks'][self.topAsk[ticker]]
+                    self.topAsk[ticker] = float(self.topAsk[ticker])
                 self.lastPrices[ticker] = state['last_price']
                 self.priceChange[ticker] = 0
 
@@ -173,7 +184,7 @@ class BaseBot(object):
 
 if __name__ == '__main__':
     bot = BaseBot()
-    print "options are", bot.options.data
+    print("options are", bot.options.data)
 
     for t in bot.makeThreads():
         t.daemon = True
